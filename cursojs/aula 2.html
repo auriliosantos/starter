@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <title>Curso Javascript</title>
+  </head>
+  <body>
+    <div id="app">
+      <button onclick="addBox()">Adicionar Caixa</button>
+      <ul id="lista"></ul>
+      <input type="text" name="nome" />
+      <button onClick="adicionar()">Adicionar</button>
+    </div>
+    <script>
+      function addBox() {
+        var divElement = document.querySelector("#app");
+        var boxElement = document.createElement("div");
+
+        boxElement.style.height = 100;
+        boxElement.style.width = 100;
+        boxElement.style.backgroundColor = "red";
+        boxElement.addEventListener("mouseover", (event) => changeColor(event));
+
+        divElement.appendChild(boxElement);
+      }
+
+      function getRandomColor() {
+        var letters = "0123456789ABCDEF";
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      function changeColor(event) {
+        event.target.style.backgroundColor = getRandomColor();
+      }
+
+      var nomes = ["Diego", "Gabriel", "Lucas"];
+      var listElement = document.querySelector("ul");
+
+      nomes.forEach((nome) => {
+        var listItemElement = document.createElement("li");
+        var textElement = document.createTextNode(nome);
+
+        listItemElement.appendChild(textElement);
+
+        listElement.appendChild(listItemElement);
+      });
+
+      function adicionar() {
+        var inputElement = document.querySelector('input[name="nome"]');
+        var listItemElement = document.createElement("li");
+        var textElement = document.createTextNode(inputElement.value);
+
+        listItemElement.appendChild(textElement);
+
+        listElement.appendChild(listItemElement);
+        inputElement.value = "";
+      }
+    </script>
+  </body>
+</html>
