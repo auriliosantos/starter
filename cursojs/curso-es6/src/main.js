@@ -1,27 +1,29 @@
-// Funão delay aciona o .then após 1s
-const delay = () => new Promise((resolve) => setTimeout(resolve, 1000));
+import axios from "axios";
 
-function umPorSegundo() {
-  delay().then(() => {
-    console.log("1s");
-    delay().then(() => {
-      console.log("2s");
-      delay().then(() => {
-        console.log("3s");
-      });
+function getUserFromGithub(user) {
+  axios
+    .get(`https://api.github.com/users/${user}`)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.log("Usuário não existe");
     });
-  });
 }
 
-umPorSegundo();
+getUserFromGithub("diego3g");
+getUserFromGithub("diego3g124123");
 
-async function umPorSegundo2() {
-  await delay();
-  console.log("1s");
-  await delay();
-  console.log("2s");
-  await delay();
-  console.log("3s");
+//usando async await
+
+async function getUserFromGithub2(user) {
+  try {
+    const { data } = await axios.get(`https://api.github.com/users/${user}`);
+    console.log(data);
+  } catch (err) {
+    console.log("Usuário não existe");
+  }
 }
 
-umPorSegundo2();
+getUserFromGithub2("diego3g");
+getUserFromGithub2("diego3g124123");
