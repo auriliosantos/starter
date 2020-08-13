@@ -1,33 +1,27 @@
 import axios from "axios";
 
-class Github {
-  static getRepositories(repo) {
-    axios
-      .get(`https://api.github.com/repos/${repo}`)
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((err) => {
-        console.log("Repositório não existe");
-      });
-  }
-}
+const buscaUsuario = (usuario) => {
+  axios
+    .get(`https://api.github.com/users/${usuario}`)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((err) => {
+      console.log("Usuário não existe");
+    });
+};
 
-Github.getRepositories("rocketseat/unform");
-Github.getRepositories("rocketseat/dslkvmskv");
+buscaUsuario("diego3g");
 
 //usando async await
 
-class Github2 {
-  static async getRepositories(repo) {
-    try {
-      const { data } = await axios.get(`https://api.github.com/repos/${repo}`);
-      console.log(data);
-    } catch (err) {
-      console.log("Repositório não existe");
-    }
+const buscaUsuario2 = async (usuario) => {
+  try {
+    const { data } = await axios.get(`https://api.github.com/users/${usuario}`);
+    console.log(data);
+  } catch (err) {
+    console.log("Usuário não existe");
   }
-}
+};
 
-Github2.getRepositories("rocketseat/unform");
-Github2.getRepositories("rocketseat/dslkvmskv");
+buscaUsuario2("diego3g");
