@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 const AppStack = createStackNavigator();
 
 import Main from './pages/Main';
+import Product from './pages/Product';
 
 export default function Routes() {
   return (
@@ -21,6 +22,7 @@ export default function Routes() {
           headerTintColor: '#fff',
         }}>
         <AppStack.Screen name="JSHunt" component={Main} />
+        <AppStack.Screen name="Product" component={Product} />
       </AppStack.Navigator>
     </NavigationContainer>
   );
