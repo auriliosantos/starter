@@ -3,6 +3,8 @@ import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 
 import api from '../../services/api';
 
+import styles from './styles';
+
 export default class Main extends Component {
   state = {
     products: [],
@@ -22,19 +24,20 @@ export default class Main extends Component {
   };
 
   renderItem = ({item}) => (
-    <View>
-      <Text>{item.title}</Text>
-      <Text>{item.description}</Text>
-      <TouchableOpacity onPress={() => {}}>
-        <Text>Acessar</Text>
+    <View style={styles.productContainer}>
+      <Text style={styles.productTitle}>{item.title}</Text>
+      <Text style={styles.productDescription}>{item.description}</Text>
+      <TouchableOpacity style={styles.productButton} onPress={() => {}}>
+        <Text style={styles.productButtonText}>Acessar</Text>
       </TouchableOpacity>
     </View>
   );
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <FlatList
+          contentContainerStyle={styles.list}
           data={this.state.products}
           keyExtractor={(item) => item._id}
           renderItem={this.renderItem}
