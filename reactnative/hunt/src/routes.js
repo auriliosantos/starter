@@ -12,7 +12,13 @@ export default function Routes() {
       <AppStack.Navigator
         screenOptions={{
           headerShown: true,
-          headerTitleStyle: {alignSelf: 'center'},
+          headerStyle: {
+            backgroundColor: '#da552f',
+          },
+          headerTitleStyle: {
+            alignSelf: 'center',
+          },
+          headerTintColor: '#fff',
         }}>
         <AppStack.Screen name="JSHunt" component={Main} />
       </AppStack.Navigator>
