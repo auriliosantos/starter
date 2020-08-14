@@ -8,6 +8,7 @@ import styles from './styles';
 export default class Main extends Component {
   state = {
     products: [],
+    productInfo: {},
     page: 1,
   };
 
@@ -18,9 +19,23 @@ export default class Main extends Component {
   loadProducts = async (page = 1) => {
     const response = await api.get(`/products?page=${page}`);
 
-    const {docs} = response.data;
+    const {docs, ...productInfo} = response.data;
 
-    this.setState({products: docs, page});
+    this.setState({
+      products: [...this.state.products, ...docs],
+      productInfo,
+      page,
+    });
+  };
+
+  loadMore = () => {
+    const {page, productInfo} = this.state;
+
+    if (page === productInfo.pages) return;
+
+    const pageNumber = page + 1;
+
+    this.loadProducts(pageNumber);
   };
 
   renderItem = ({item}) => (
@@ -41,6 +56,8 @@ export default class Main extends Component {
           data={this.state.products}
           keyExtractor={(item) => item._id}
           renderItem={this.renderItem}
+          onEndReached={this.loadMore}
+          onEndReachedThreshold={0.1}
         />
       </View>
     );
